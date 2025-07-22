@@ -1,0 +1,58 @@
+# CONTINUE_GUIDE.txt
+
+Prompt for AI:
+
+"Continue guiding me through the 10 steps to make my FastAPI backend more robust, performant, and faster. I have already installed postgres"
+
+1. Move to a Production-Ready Database
+Switch from SQLite to PostgreSQL (or another robust RDBMS) for better concurrency, reliability, and scaling.
+2. Use a Real Task Queue
+Integrate Celery or RQ with a message broker (Redis/RabbitMQ) for background jobs.
+This allows distributed processing, retries, and better resource management.
+3. Add Caching
+Cache results for repeated URLs (e.g., using Redis or a database table).
+Avoid redundant downloads and processing.
+4. Improve Error Handling & Retries
+Add automatic retries for transient errors (network, temporary failures).
+Implement notifications or logs for failed jobs.
+5. Add Authentication & Rate Limiting
+Use API keys, OAuth, or JWT for authentication.
+Add rate limiting to prevent abuse (e.g., via FastAPI middleware or a proxy).
+6. Use Cloud/Object Storage for Files
+Store audio and stems in S3, GCS, or Azure Blob Storage instead of local disk.
+This enables scaling, durability, and easier cleanup.
+7. Add Monitoring & Logging
+Use structured logging (e.g., with loguru or structlog).
+Integrate with Prometheus/Grafana or another monitoring stack for metrics.
+8. Resource Management
+Limit concurrent jobs per user/IP.
+Set max file size and timeout for processing.
+9. Optimize Audio Processing
+Profile and parallelize audio processing if possible.
+Use faster libraries or hardware acceleration (GPU, if available).
+10. Add Tests and CI/CD
+Write unit and integration tests for endpoints and job logic.
+Set up CI/CD for automated testing and deployment.
+Suggested Next Steps
+Choose a Task Queue: Decide on Celery or RQ, and set up Redis as a broker.
+Refactor Background Processing: Move job processing to the task queue.
+Switch to PostgreSQL: Update SQLAlchemy config and migrate schema.
+Move Files to S3: Refactor file handling to use cloud storage.
+Add Authentication: Implement API key or JWT-based auth.
+Add Caching: Use Redis to cache processed results.
+Add Monitoring: Integrate logging and metrics
+
+---
+
+Prompt for AI:
+
+"Guide me through verifying my Dockerized FastAPI backend deployment and completing the final robustness steps:
+
+1. Verify all Docker containers are running with `docker-compose ps`.
+2. Access the FastAPI docs at http://localhost:8000/docs and test the endpoints (including authentication if enabled).
+3. Submit a job and confirm it is processed by the workers (check logs with `docker-compose logs -f`).
+4. Scale workers as needed with `docker-compose up --scale worker=4 -d`.
+5. Stop all services with `docker-compose down` when finished.
+6. Add automated tests using pytest and FastAPI's TestClient.
+7. Set up CI/CD (e.g., GitHub Actions) to run tests and optionally build/deploy Docker images on push.
+8. Ask for help with any troubleshooting, testing, or deployment questions."
